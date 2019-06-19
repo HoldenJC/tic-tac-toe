@@ -15,3 +15,11 @@ img {
   margin-bottom: 15px;
   background-color: white;
 }
+
+#board {
+  display: none;
+}
+
+#nameForm {
+  text-align: center;
+}

@@ -15,6 +15,17 @@
         <h1 class="display-4">Tic-Tac-Toe</h1>
       </div>
 
+      <form id="nameForm">
+
+        <!-- <label for="namePlayerX">Enter X Player's Name:</label> -->
+        <input id="namePlayerX" type="text" name="name" placeholder="X Player's Name">
+        <!-- <label for="namePlayerO">Enter O Player's Name:</label> -->
+        <input id="namePlayerO" type="text" name="name" placeholder="O Player's Name">
+
+        <button type="submit" name="button">Start Game</button>
+      </form>
+      
+      <div id="board">
       <div class="row">
         <div id="1" class="col card bg-warning">
           id 1
@@ -47,6 +58,10 @@
         <div id="9" class="col card bg-warning">
           id 9
         </div>
+      </div>
+    </div>
+      <div id="victoryText">
+
       </div>
     </div>
   </body>
