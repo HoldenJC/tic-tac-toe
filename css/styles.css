@@ -8,3 +8,10 @@ img {
   max-width: 50%;
   margin: auto;
 }
+
+.jumbotron {
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  background-color: white;
+}

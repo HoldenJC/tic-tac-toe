@@ -26,8 +26,8 @@ function checkWin(userMoves){
       alert("victory");
     } else if(userMoves.includes("7") && userMoves.includes("8") && userMoves.includes("9")) {
       alert("victory");
-    } else {
-      alert("keep playing");
+    } else if(userMoves.length === 5){
+      alert("tie game");
     }
   }
 };
@@ -37,16 +37,20 @@ function attachContactListeners() {
   $(".col").click(function(){
     if(currentPlayer === "x"){
       id = $(this).attr('id');
-      player1.moves += id;
-      $("#" + id).append("<img src=\"https://www.chilibeach.com/v2/imgs/ico-x.png\">");
-      checkWin(player1.moves);
-      currentPlayer = player2.piece;
+      if($("#" + id + " > img").length < 1){
+        player1.moves += id;
+        $("#" + id).append("<img src=\"https://www.chilibeach.com/v2/imgs/ico-x.png\">");
+        checkWin(player1.moves);
+        currentPlayer = player2.piece;
+      }
     } else {
       id = $(this).attr('id');
-      player2.moves += id;
-      $("#" + id).append("<img src=\"https://i.dlpng.com/static/png/1205847-letter-o-transparent-background-png-o-png-771_771_preview.png\">");
-      checkWin(player2.moves);
-      currentPlayer = player1.piece;
+      if($("#" + id + " > img").length < 1){
+        player2.moves += id;
+        $("#" + id).append("<img src=\"https://i.dlpng.com/static/png/1205847-letter-o-transparent-background-png-o-png-771_771_preview.png\">");
+        checkWin(player2.moves);
+        currentPlayer = player1.piece;
+      }
     }
   })
 };
