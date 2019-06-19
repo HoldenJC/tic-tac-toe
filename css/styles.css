@@ -1,5 +1,10 @@
 .col {
   height: 20vh;
   width: 20vw;
-  text-align: center;  
+  text-align: center;
+}
+
+img {
+  max-width: 50%;
+  margin: auto;
 }
