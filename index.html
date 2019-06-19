@@ -1,59 +1,72 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
-    <link href="css/styles.css" rel="stylesheet" type="text/css">
-    <script src="js/jquery-3.4.1.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/scripts.js"></script>
-    <title></title>
-  </head>
-  <body>
-    <div class="container">
-      <div class="jumbotron shadow">
-        <h1 class="display-4">Tic-Tac-Toe</h1>
-      </div>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+  <link href="css/styles.css" rel="stylesheet" type="text/css">
+  <script src="js/jquery-3.4.1.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="js/scripts.js"></script>
+  <title></title>
+</head>
+<body>
+  <div class="container">
+    <div class="jumbotron shadow">
+      <h1 class="display-1">Tic-Tac-Toe</h1>
+    </div>
 
-      <form id="nameForm">
+    <form id="nameForm">
 
-        <!-- <label for="namePlayerX">Enter X Player's Name:</label> -->
-        <input id="namePlayerX" type="text" name="name" placeholder="X Player's Name">
-        <!-- <label for="namePlayerO">Enter O Player's Name:</label> -->
-        <input id="namePlayerO" type="text" name="name" placeholder="O Player's Name">
+      <input id="namePlayerX" type="text" name="name" placeholder="X Player's Name">
 
-        <button type="submit" name="button">Start Game</button>
-      </form>
+      <input id="namePlayerO" type="text" name="name" placeholder="O Player's Name">
 
-      <div id="board">
+      <button type="submit" name="button">Start Game</button>
+    </form>
+
+    <div id="board">
       <div class="row">
-        <div id="1" class="col card bg-warning">
+        <div id="1" class="col card bg-info">
         </div>
-        <div id="2" class="col card bg-warning">
+        <div id="2" class="col card bg-info">
         </div>
-        <div id="3" class="col card bg-warning">
-        </div>
-      </div>
-      <div class="row">
-        <div id="4" class="col card bg-warning">
-        </div>
-        <div id="5" class="col card bg-warning">
-        </div>
-        <div id="6" class="col card bg-warning">
+        <div id="3" class="col card bg-info">
         </div>
       </div>
       <div class="row">
-        <div id="7" class="col card bg-warning">
+        <div id="4" class="col card bg-info">
         </div>
-        <div id="8" class="col card bg-warning">
+        <div id="5" class="col card bg-info">
         </div>
-        <div id="9" class="col card bg-warning">
+        <div id="6" class="col card bg-info">
+        </div>
+      </div>
+      <div class="row">
+        <div id="7" class="col card bg-info">
+        </div>
+        <div id="8" class="col card bg-info">
+        </div>
+        <div id="9" class="col card bg-info">
         </div>
       </div>
     </div>
-      <div id="endGameText">
 
-      </div>
+    <div id="endGameText" class="shadow">
+
     </div>
-  </body>
+
+    <div id="resetButton">
+      <button id="resetGame" type="reset" name="button" class="btn btn-light">Play Again?</button>
+    </div>
+
+    <div id="xPlayerScore" class="card bg-light">
+
+    </div>
+
+    <div id="oPlayerScore" class="card bg-light">
+
+    </div>
+
+  </div>
+</body>
 </html>

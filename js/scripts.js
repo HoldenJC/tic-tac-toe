@@ -1,7 +1,8 @@
 function Player(piece){
   this.piece = piece,
   this.moves = "",
-  this.name = ""
+  this.name = "",
+  this.score = 0;
 };
 
 Player.prototype.setName = function(name){
@@ -45,11 +46,27 @@ function checkWin(userMoves){
 function endGameMessage(){
   if(currentPlayer === player1.piece && victory){
     $("#endGameText").html(player1.name + " wins");
+    $("#endGameText").addClass("bg-success text-white");
+    $("#resetButton").delay(1000).fadeIn(800);
+    player1.scoreCounter();
   } else if(victory){
     $("#endGameText").html(player2.name + " wins");
+    $("#endGameText").addClass("bg-success text-white");
+    $("#resetButton").delay(1000).fadeIn(800);
+    player2.scoreCounter();
   } else {
     $("#endGameText").html(player1.name + " and " + player2.name + " tie!");
+    $("#endGameText").addClass("bg-warning text-white");
+    $("#resetButton").delay(1000).fadeIn(800);
   }
+}
+
+Player.prototype.scoreCounter = function(){
+  this.score++;
+  $("#xPlayerScore").html(player1.name + "<br>Wins: " + player1.score);
+  $("#oPlayerScore").html(player2.name + "<br>Wins: " + player2.score);
+  $("#xPlayerScore").fadeIn().css("display","inline-block");
+  $("#oPlayerScore").fadeIn().css("display","inline-block");
 }
 
 function playerTurnMessage(){
@@ -85,10 +102,25 @@ function attachContactListeners() {
   })
 };
 
+var resetForm = function(){
+  $(".col").empty();
+  player1.moves = "";
+  player2.moves = "";
+  victory = false;
+  if(currentPlayer === "x"){
+    $("#endGameText").html(player1.name + "\'s Turn");
+  } else {
+    $("#endGameText").html(player2.name + "\'s Turn");
+  }
+}
+
 $(function(){
   attachContactListeners();
   $("#nameForm").submit(function(event){
     event.preventDefault();
+    $("#resetGame").click(function(){
+      resetForm();
+    })
 
     player1.setName($("#namePlayerX").val());
     player2.setName($("#namePlayerO").val());
