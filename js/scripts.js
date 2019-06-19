@@ -33,14 +33,32 @@ function checkWin(userMoves){
       victory = true;
     } else if(userMoves.includes("7") && userMoves.includes("8") && userMoves.includes("9")) {
       victory = true;
-    } else if(userMoves.length === 5){``
-      alert("tie game");
+    } else if(userMoves.length === 5){
+      endGameMessage();
     }
     if(victory){
-      $("#victoryText").html(currentPlayer + " wins");
+      endGameMessage();
     }
   }
 };
+
+function endGameMessage(){
+  if(currentPlayer === player1.piece && victory){
+    $("#endGameText").html(player1.name + " wins");
+  } else if(victory){
+    $("#endGameText").html(player2.name + " wins");
+  } else {
+    $("#endGameText").html(player1.name + " and " + player2.name + " tie!");
+  }
+}
+
+function playerTurnMessage(){
+  if(currentPlayer === player1.piece && !victory){
+    $("#endGameText").html(player1.name + "\'s Turn");
+  } else if(!victory){
+    $("#endGameText").html(player2.name + "\'s Turn");
+  }
+}
 
 function attachContactListeners() {
   var id;
@@ -52,6 +70,7 @@ function attachContactListeners() {
         $("#" + id).append("<img src=\"https://www.chilibeach.com/v2/imgs/ico-x.png\">");
         checkWin(player1.moves);
         currentPlayer = player2.piece;
+        playerTurnMessage();
       }
     } else {
       id = $(this).attr('id');
@@ -60,11 +79,11 @@ function attachContactListeners() {
         $("#" + id).append("<img src=\"https://i.dlpng.com/static/png/1205847-letter-o-transparent-background-png-o-png-771_771_preview.png\">");
         checkWin(player2.moves);
         currentPlayer = player1.piece;
+        playerTurnMessage();
       }
     }
   })
 };
-
 
 $(function(){
   attachContactListeners();
@@ -76,7 +95,6 @@ $(function(){
 
     $("#nameForm").fadeOut(600);
     $("#board").delay(600).fadeIn(800);
-
-
+    $("#endGameText").delay(1500).fadeIn().html(player1.name + "\'s Turn");
   });
 });
