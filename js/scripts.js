@@ -18,22 +18,17 @@ var currentPlayer = player1.piece;
 
 function checkWin(userMoves){
   if(userMoves.length > 2 && !victory){
-    if (userMoves.includes("1") && userMoves.includes("2") && userMoves.includes("3")){
-      victory = true;
-    } else if(userMoves.includes("1") && userMoves.includes("5") && userMoves.includes("9")) {
-      victory = true;
-    } else if(userMoves.includes("1") && userMoves.includes("4") && userMoves.includes("7")) {
-      victory = true;
-    } else if(userMoves.includes("2") && userMoves.includes("5") && userMoves.includes("8")) {
-      victory = true;
-    } else if(userMoves.includes("3") && userMoves.includes("5") && userMoves.includes("7")) {
-      victory = true;
-    } else if(userMoves.includes("3") && userMoves.includes("6") && userMoves.includes("9")) {
-      victory = true;
-    } else if(userMoves.includes("4") && userMoves.includes("5") && userMoves.includes("6")) {
-      victory = true;
-    } else if(userMoves.includes("7") && userMoves.includes("8") && userMoves.includes("9")) {
-      victory = true;
+    if ((userMoves.includes("1") && userMoves.includes("2") && userMoves.includes("3")) ||
+        (userMoves.includes("1") && userMoves.includes("5") && userMoves.includes("9")) ||
+        (userMoves.includes("1") && userMoves.includes("4") && userMoves.includes("7")) ||
+        (userMoves.includes("2") && userMoves.includes("5") && userMoves.includes("8")) ||
+        (userMoves.includes("3") && userMoves.includes("5") && userMoves.includes("7")) ||
+        (userMoves.includes("3") && userMoves.includes("6") && userMoves.includes("9")) ||
+        (userMoves.includes("4") && userMoves.includes("5") && userMoves.includes("6")) ||
+        (userMoves.includes("7") && userMoves.includes("8") && userMoves.includes("9"))) {
+
+        victory = true;
+
     } else if(userMoves.length === 5){
       endGameMessage();
     }
