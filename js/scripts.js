@@ -118,17 +118,22 @@ function resetForm(){
 $(function(){
   attachListeners();
   $("#nameForm").submit(function(){
-    debugger;
+    $("#alertField").empty();
     event.preventDefault();
     $("#resetGame").click(function(){
       resetForm();
     })
 
-    player1.setPlayer($("#namePlayerX").val(), "<img src=\"" + $("#playerIcon1").val() + "\">");
-    player2.setPlayer($("#namePlayerO").val(), "<img src=\"" + $("#playerIcon2").val() + "\">");
-
-    $("#nameForm").fadeOut(600);
-    $("#board").delay(600).fadeIn(800);
-    $("#endGameText").delay(1500).fadeIn().html(player1.name + "\'s Turn");
+    if($("#playerIcon1").val() != $("#playerIcon2").val()){
+      player1.setPlayer($("#namePlayerX").val(), "<img src=\"" + $("#playerIcon1").val() + "\">");
+      player2.setPlayer($("#namePlayerO").val(), "<img src=\"" + $("#playerIcon2").val() + "\">");
+      $("#nameForm").fadeOut(600);
+      $("#board").delay(600).fadeIn(800);
+      $("#endGameText").delay(1500).fadeIn().html(player1.name + "\'s Turn");
+    } else {
+      $("#alertField").append("<div id=\"userAlert\" class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>");
+      $("#userAlert").append("Please select different icons to continue!");
+    }
+    
   });
 });
