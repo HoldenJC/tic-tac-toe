@@ -1,16 +1,17 @@
-function Player(piece){
+function Player(piece, icon){
   this.piece = piece,
   this.moves = "",
   this.name = "",
   this.score = 0;
+  this.icon = icon;
 };
 
 Player.prototype.setName = function(name){
   this.name = name;
 }
 
-var player1 = new Player("x");
-var player2 = new Player("o");
+var player1 = new Player("x", "<img src=\"https://www.chilibeach.com/v2/imgs/ico-x.png\">");
+var player2 = new Player("o", "<img src=\"https://i.dlpng.com/static/png/1205847-letter-o-transparent-background-png-o-png-771_771_preview.png\">");
 
 var victory = false;
 
@@ -75,36 +76,30 @@ function playerTurnMessage(){
   }
 }
 
-function attachListeners() {
-  var id;
-  $(".col").click(function(){
-    if(currentPlayer === "x"){
-      id = $(this).attr('id');
-      if($("#" + id + " > img").length < 1 && !victory){
-        player1.moves += id;
-        $("#" + id).append("<img src=\"https://www.chilibeach.com/v2/imgs/ico-x.png\">");
-        checkWin(player1.moves);
-        currentPlayer = player2.piece;
-        if(!victory && player1.moves.length < 5 && player2.moves.length < 5){
-          playerTurnMessage();
-        }
-      }
-    } else {
-      id = $(this).attr('id');
-      if($("#" + id + " > img").length < 1 && !victory){
-        player2.moves += id;
-        $("#" + id).append("<img src=\"https://i.dlpng.com/static/png/1205847-letter-o-transparent-background-png-o-png-771_771_preview.png\">");
-        checkWin(player2.moves);
-        currentPlayer = player1.piece;
-        if(!victory && player1.moves.length < 5 && player2.moves.length < 5){
-          playerTurnMessage();
-        }
-      }
+function placeIcon (id,playerA, playerB ){
+  if($("#" + id + " > img").length < 1 && !victory){
+    playerA.moves += id;
+    $("#" + id).append(playerA.icon);
+    checkWin(playerA.moves);
+    currentPlayer = playerB.piece;
+    if(!victory && playerA.moves.length < 5 && playerB.moves.length < 5){
+      playerTurnMessage();
     }
-  })
+  }
+}
+
+function attachListeners() {
+  $(".col").click(function(){
+    var id = $(this).attr('id');
+    if(currentPlayer === "x"){
+      placeIcon(id,player1,player2);
+    } else {
+      placeIcon(id,player2,player1);
+    }
+  });
 };
 
-var resetForm = function(){
+function resetForm(){
   $(".col").empty();
   player1.moves = "";
   player2.moves = "";
