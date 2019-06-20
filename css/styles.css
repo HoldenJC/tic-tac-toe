@@ -25,6 +25,16 @@ img {
 
 #nameForm {
   text-align: center;
+  opacity: 0.9;
+}
+
+#nameEnterRow, #iconSelectRow {
+  height: 50px !important;
+}
+
+#startGameButton {
+  position: relative;
+  z-index: 1000;
 }
 
 .bg-info {

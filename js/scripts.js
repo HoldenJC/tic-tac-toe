@@ -1,34 +1,35 @@
 var victory = false;
 
-function Player(piece, icon){
+function Player(piece){
   this.piece = piece,
   this.moves = "",
   this.name = "",
   this.score = 0;
-  this.icon = icon;
+  this.icon = "";
 };
 
-Player.prototype.setName = function(name){
+Player.prototype.setPlayer = function(name, icon){
   this.name = name;
+  this.icon = icon;
 }
 
-var player1 = new Player("x", "<img src=\"https://www.chilibeach.com/v2/imgs/ico-x.png\">");
-var player2 = new Player("o", "<img src=\"https://i.dlpng.com/static/png/1205847-letter-o-transparent-background-png-o-png-771_771_preview.png\">");
+var player1 = new Player("x");
+var player2 = new Player("o");
 
 var currentPlayer = player1.piece;
 
 function checkWin(userMoves){
   if(userMoves.length > 2 && !victory){
     if ((userMoves.includes("1") && userMoves.includes("2") && userMoves.includes("3")) ||
-        (userMoves.includes("1") && userMoves.includes("5") && userMoves.includes("9")) ||
-        (userMoves.includes("1") && userMoves.includes("4") && userMoves.includes("7")) ||
-        (userMoves.includes("2") && userMoves.includes("5") && userMoves.includes("8")) ||
-        (userMoves.includes("3") && userMoves.includes("5") && userMoves.includes("7")) ||
-        (userMoves.includes("3") && userMoves.includes("6") && userMoves.includes("9")) ||
-        (userMoves.includes("4") && userMoves.includes("5") && userMoves.includes("6")) ||
-        (userMoves.includes("7") && userMoves.includes("8") && userMoves.includes("9"))) {
+    (userMoves.includes("1") && userMoves.includes("5") && userMoves.includes("9")) ||
+    (userMoves.includes("1") && userMoves.includes("4") && userMoves.includes("7")) ||
+    (userMoves.includes("2") && userMoves.includes("5") && userMoves.includes("8")) ||
+    (userMoves.includes("3") && userMoves.includes("5") && userMoves.includes("7")) ||
+    (userMoves.includes("3") && userMoves.includes("6") && userMoves.includes("9")) ||
+    (userMoves.includes("4") && userMoves.includes("5") && userMoves.includes("6")) ||
+    (userMoves.includes("7") && userMoves.includes("8") && userMoves.includes("9"))) {
 
-        victory = true;
+      victory = true;
 
     } else if(userMoves.length === 5){
       endGameMessage();
@@ -90,7 +91,7 @@ function placeIcon (id,playerA, playerB ){
 }
 
 function attachListeners() {
-  $(".col").click(function(){
+  $("#board .col").click(function(){
     var id = $(this).attr('id');
     if(currentPlayer === "x"){
       placeIcon(id,player1,player2);
@@ -116,14 +117,15 @@ function resetForm(){
 
 $(function(){
   attachListeners();
-  $("#nameForm").submit(function(event){
+  $("#nameForm").submit(function(){
+    debugger;
     event.preventDefault();
     $("#resetGame").click(function(){
       resetForm();
     })
 
-    player1.setName($("#namePlayerX").val());
-    player2.setName($("#namePlayerO").val());
+    player1.setPlayer($("#namePlayerX").val(), "<img src=\"" + $("#playerIcon1").val() + "\">");
+    player2.setPlayer($("#namePlayerO").val(), "<img src=\"" + $("#playerIcon2").val() + "\">");
 
     $("#nameForm").fadeOut(600);
     $("#board").delay(600).fadeIn(800);

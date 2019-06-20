@@ -17,11 +17,40 @@
 
     <form id="nameForm">
 
-      <input id="namePlayerX" type="text" name="name" placeholder="X Player's Name">
+      <div id="nameEnterRow" class="row">
+        <div class="col">
+          <input id="namePlayerX" class="form-control" type="text" name="name" placeholder="X Player's Name">
+        </div>
+        <div class="col">
+          <input id="namePlayerO" class="form-control" type="text" name="name" placeholder="O Player's Name">
+        </div>
+      </div>
 
-      <input id="namePlayerO" type="text" name="name" placeholder="O Player's Name">
+      <div id="iconSelectRow" class="row">
+        <div class="col">
+          <select class="form-control" id="playerIcon1">
+            <option value="img/x-icon.png">Classic X</option>
+            <option value="img/o-icon.png">Classic O</option>
+            <option value="img/donut-icon.png">Donut</option>
+            <option value="img/chess-icon.png">Chess Queen</option>
+            <option value="img/baby-icon.png">Funny Baby</option>
+            <option value="img/kermit-icon.png">Kermit the Frog</option>
+          </select>
+        </div>
+        <div class="col">
+          <select class="form-control" id="playerIcon2">
+            <option value="img/x-icon.png">Classic X</option>
+            <option value="img/o-icon.png">Classic O</option>
+            <option value="img/donut-icon.png">Donut</option>
+            <option value="img/chess-icon.png">Chess Queen</option>
+            <option value="img/baby-icon.png">Funny Baby</option>
+            <option value="img/kermit-icon.png">Kermit the Frog</option>
+          </select>
+        </div>
+      </div>
 
-      <button type="submit" name="button">Start Game</button>
+      <button id="startGameButton" type="submit" name="button" class="btn btn-light">Start Game</button>
+
     </form>
 
     <div id="board">
@@ -68,6 +97,6 @@
     </div>
 
   </div>
-  
+
 </body>
 </html>
