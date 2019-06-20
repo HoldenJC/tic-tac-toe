@@ -47,22 +47,25 @@ function endGameMessage(){
   if(currentPlayer === player1.piece && victory){
     $("#endGameText").html(player1.name + " wins");
     $("#endGameText").addClass("bg-success text-white");
-    $("#resetButton").delay(1000).fadeIn(800);
+    $("#resetButton").delay(800).fadeIn(800);
     player1.scoreCounter();
   } else if(victory){
     $("#endGameText").html(player2.name + " wins");
     $("#endGameText").addClass("bg-success text-white");
-    $("#resetButton").delay(1000).fadeIn(800);
+    $("#resetButton").delay(800).fadeIn(800);
     player2.scoreCounter();
   } else {
     $("#endGameText").html(player1.name + " and " + player2.name + " tie!");
     $("#endGameText").addClass("bg-warning text-white");
-    $("#resetButton").delay(1000).fadeIn(800);
+    $("#resetButton").delay(800).fadeIn(800);
+    player1.scoreCounter();
   }
 }
 
 Player.prototype.scoreCounter = function(){
-  this.score++;
+  if(victory){
+    this.score++;
+  }
   $("#xPlayerScore").html(player1.name + "<br>Wins: " + player1.score);
   $("#oPlayerScore").html(player2.name + "<br>Wins: " + player2.score);
   $("#xPlayerScore").fadeIn().css("display","inline-block");
@@ -70,14 +73,14 @@ Player.prototype.scoreCounter = function(){
 }
 
 function playerTurnMessage(){
-  if(currentPlayer === player1.piece && !victory){
+  if(currentPlayer === player1.piece){
     $("#endGameText").html(player1.name + "\'s Turn");
-  } else if(!victory){
+  } else {
     $("#endGameText").html(player2.name + "\'s Turn");
   }
 }
 
-function attachContactListeners() {
+function attachListeners() {
   var id;
   $(".col").click(function(){
     if(currentPlayer === "x"){
@@ -87,7 +90,9 @@ function attachContactListeners() {
         $("#" + id).append("<img src=\"https://www.chilibeach.com/v2/imgs/ico-x.png\">");
         checkWin(player1.moves);
         currentPlayer = player2.piece;
-        playerTurnMessage();
+        if(!victory && player1.moves.length < 5 && player2.moves.length < 5){
+          playerTurnMessage();
+        }
       }
     } else {
       id = $(this).attr('id');
@@ -96,7 +101,9 @@ function attachContactListeners() {
         $("#" + id).append("<img src=\"https://i.dlpng.com/static/png/1205847-letter-o-transparent-background-png-o-png-771_771_preview.png\">");
         checkWin(player2.moves);
         currentPlayer = player1.piece;
-        playerTurnMessage();
+        if(!victory && player1.moves.length < 5 && player2.moves.length < 5){
+          playerTurnMessage();
+        }
       }
     }
   })
@@ -107,6 +114,8 @@ var resetForm = function(){
   player1.moves = "";
   player2.moves = "";
   victory = false;
+  $("#endGameText").removeClass("bg-warning bg-success text-white");
+  $("#resetButton").fadeOut(800);
   if(currentPlayer === "x"){
     $("#endGameText").html(player1.name + "\'s Turn");
   } else {
@@ -115,7 +124,7 @@ var resetForm = function(){
 }
 
 $(function(){
-  attachContactListeners();
+  attachListeners();
   $("#nameForm").submit(function(event){
     event.preventDefault();
     $("#resetGame").click(function(){
