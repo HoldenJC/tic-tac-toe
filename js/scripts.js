@@ -1,3 +1,5 @@
+var victory = false;
+
 function Player(piece, icon){
   this.piece = piece,
   this.moves = "",
@@ -12,8 +14,6 @@ Player.prototype.setName = function(name){
 
 var player1 = new Player("x", "<img src=\"https://www.chilibeach.com/v2/imgs/ico-x.png\">");
 var player2 = new Player("o", "<img src=\"https://i.dlpng.com/static/png/1205847-letter-o-transparent-background-png-o-png-771_771_preview.png\">");
-
-var victory = false;
 
 var currentPlayer = player1.piece;
 
@@ -39,23 +39,11 @@ function checkWin(userMoves){
   }
 };
 
-function endGameMessage(){
-  if(currentPlayer === player1.piece && victory){
-    $("#endGameText").html(player1.name + " wins");
-    $("#endGameText").addClass("bg-success text-white");
-    $("#resetButton").delay(800).fadeIn(800);
-    player1.scoreCounter();
-  } else if(victory){
-    $("#endGameText").html(player2.name + " wins");
-    $("#endGameText").addClass("bg-success text-white");
-    $("#resetButton").delay(800).fadeIn(800);
-    player2.scoreCounter();
-  } else {
-    $("#endGameText").html(player1.name + " and " + player2.name + " tie!");
-    $("#endGameText").addClass("bg-warning text-white");
-    $("#resetButton").delay(800).fadeIn(800);
-    player1.scoreCounter();
-  }
+function createVictoryMessage(player){
+  $("#endGameText").html(player.name + " wins");
+  $("#endGameText").addClass("bg-success text-white");
+  $("#resetButton").delay(800).fadeIn(800);
+  player.scoreCounter();
 }
 
 Player.prototype.scoreCounter = function(){
@@ -66,6 +54,19 @@ Player.prototype.scoreCounter = function(){
   $("#oPlayerScore").html(player2.name + "<br>Wins: " + player2.score);
   $("#xPlayerScore").fadeIn().css("display","inline-block");
   $("#oPlayerScore").fadeIn().css("display","inline-block");
+}
+
+function endGameMessage(){
+  if(currentPlayer === player1.piece && victory){
+    createVictoryMessage(player1);
+  } else if(victory){
+    createVictoryMessage(player2);
+  } else {
+    $("#endGameText").html(player1.name + " and " + player2.name + " tie!");
+    $("#endGameText").addClass("bg-warning text-white");
+    $("#resetButton").delay(800).fadeIn(800);
+    player1.scoreCounter();
+  }
 }
 
 function playerTurnMessage(){
